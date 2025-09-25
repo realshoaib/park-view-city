@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server"
 import { supabase } from "@/lib/supabase" // server-only client
 
+export const dynamic = "force-dynamic"
+
 // GET /api/bills?customerId=PV-019617
 export async function GET(req: Request) {
   try {
