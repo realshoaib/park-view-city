@@ -5,9 +5,9 @@ import './globals.css'
 import { AuthProvider } from './contexts/auth-context'
 
 export const metadata: Metadata = {
-  title: 'v0 App',
+  title: 'Park View City - Billing',
   description: 'Created with v0',
-  generator: 'v0.app',
+  generator: 'Shoaib Khalil',
 }
 
 export default function RootLayout({
