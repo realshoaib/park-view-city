@@ -64,7 +64,7 @@ export function generateBillPDF(bill: Bill): Promise<Blob> {
 
       const billDetails = [
         `Bill Number: ${bill.billNumber}`,
-        `Customer ID: ${bill.consumerID}`,
+        `Customer ID: ${bill.customer_id}`,
         `Description: ${bill.description}`,
         `Bill Date: ${new Date(bill.issue_date).toLocaleDateString()}`,
         `Due Date: ${new Date(bill.due_date).toLocaleDateString()}`,
@@ -191,7 +191,7 @@ BT
 /F1 14 Tf
 (Bill Number: ${bill.billNumber}) Tj
 0 -20 Td
-(Customer ID: ${bill.consumerID}) Tj
+(Customer ID: ${bill.customer_id}) Tj
 0 -20 Td
 (Description: ${bill.description}) Tj
 0 -20 Td

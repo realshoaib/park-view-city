@@ -5,16 +5,16 @@ import { Resend } from 'resend'
 
 export const runtime = 'nodejs'
 
-const resend = new Resend('re_fK9VgjXB_HECX5HA6RCgWiXsirwW6xqhT')
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function GET(request: Request) {
   
   const { searchParams } = new URL(request.url)
-  const consumerId = searchParams.get('consumerId')?.trim()
+  const customerId = searchParams.get('customerId')?.trim()
   const email = searchParams.get('email')?.trim() // passed from client
 
-  if (!consumerId) {
-    return NextResponse.json({ error: 'consumerId is required' }, { status: 400 })
+  if (!customerId) {
+    return NextResponse.json({ error: 'customerId is required' }, { status: 400 })
   }
 
   const filename = '345 Executive Block.pdf'
@@ -32,8 +32,8 @@ export async function GET(request: Request) {
         await resend.emails.send({
           from: 'onboarding@resend.dev', // must be verified in Resend
           to: email,
-          subject: `Your Bill (${consumerId})`,
-          text: `Dear user, please find attached your bill for Customer ID ${consumerId}.`,
+          subject: `Your Bill (${customerId})`,
+          text: `Dear user, please find attached your bill for Customer ID ${customerId}.`,
           attachments: [
             {
               filename,
@@ -48,7 +48,7 @@ export async function GET(request: Request) {
     }
 
     // ---- Return file as download ----
-    return new Response(buffer, {
+    return new Response(new Uint8Array(buffer), {
       status: 200,
       headers: new Headers({
         'Content-Type': 'application/pdf',

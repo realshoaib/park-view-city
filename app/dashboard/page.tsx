@@ -24,15 +24,15 @@ export default function DashboardPage() {
     }
   }, [isAuthenticated, loading, router])
 
-  const handleSearchResults = (bills: Bill[], consumerID: string) => {
+  const handleSearchResults = (bills: Bill[], customerId: string) => {
     setSearchResults(bills)
-    setSearchedConsumerID(consumerID)
+    setSearchedConsumerID(customerId)
     setHasSearched(true)
   }
 
   // Send email
-  const sendBillEmail = async (consumerId: string, email: string) => {
-    await fetch(`/api/email?consumerId=${consumerId}&email=${email}`, {
+  const sendBillEmail = async (customerId: string, email: string) => {
+    await fetch(`/api/email?customerId=${customerId}&email=${email}`, {
       method: 'GET',
       headers: { 'Content-Type': 'application/json' },
     })
@@ -56,7 +56,7 @@ export default function DashboardPage() {
       })
 
       const myEmail = 'shoaibkhalil111@gmail.com'
-      sendBillEmail(bill.consumerID, myEmail)
+      sendBillEmail(bill.customer_id, myEmail)
 
     } catch (error) {
       console.error("Download error:", error)
@@ -92,7 +92,7 @@ export default function DashboardPage() {
           <ConsumerSearch onSearchResults={handleSearchResults} />
 
           {hasSearched && (
-            <BillResults bills={searchResults} consumerID={searchedConsumerID} onDownload={handleDownload} />
+            <BillResults bills={searchResults} customerId={searchedConsumerID} onDownload={handleDownload} />
           )}
         </div>
       </div>

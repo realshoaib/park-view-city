@@ -1,7 +1,7 @@
 // Mock data for demonstration - in a real app this would come from a database
 export interface Bill {
   id: string
-  consumerID: string
+  customer_id: string
   billNumber: string
   issue_date: string
   due_date: string
@@ -15,7 +15,7 @@ export const mockBills: Bill[] = [
   // HS001 - Admin User's Bills (Multiple properties)
   {
     id: "1",
-    consumerID: "HS001",
+    customer_id: "HS001",
     billNumber: "BILL-2024-001",
     issue_date: "2024-01-15",
     due_date: "2024-02-15",
@@ -26,7 +26,7 @@ export const mockBills: Bill[] = [
   },
   {
     id: "2",
-    consumerID: "HS001",
+    customer_id: "HS001",
     billNumber: "BILL-2024-002",
     issue_date: "2024-02-15",
     due_date: "2024-03-15",
@@ -37,7 +37,7 @@ export const mockBills: Bill[] = [
   },
   {
     id: "3",
-    consumerID: "HS001",
+    customer_id: "HS001",
     billNumber: "BILL-2024-003",
     issue_date: "2024-03-15",
     due_date: "2024-04-15",
@@ -48,8 +48,8 @@ export const mockBills: Bill[] = [
   }
 ]
 
-export function searchBillsByConsumerID(consumerID: string): Bill[] {
-  return mockBills.filter((bill) => bill.consumerID.toLowerCase().includes(consumerID.toLowerCase()))
+export function searchBillsByConsumerID(customer_id: string): Bill[] {
+  return mockBills.filter((bill) => bill.customer_id.toLowerCase().includes(customer_id.toLowerCase()))
 }
 
 export function getBillById(id: string): Bill | undefined {
@@ -58,7 +58,7 @@ export function getBillById(id: string): Bill | undefined {
 
 // Get all available customer IDs
 export function getAllConsumerIDs(): string[] {
-  const uniqueIDs = [...new Set(mockBills.map(bill => bill.consumerID))]
+  const uniqueIDs = [...new Set(mockBills.map(bill => bill.customer_id))]
   return uniqueIDs.sort()
 }
 
@@ -75,15 +75,15 @@ export function getBillsByDescription(description: string): Bill[] {
 }
 
 // Get total amount_due for a customer
-export function getTotalAmountForConsumer(consumerID: string): number {
+export function getTotalAmountForConsumer(customer_id: string): number {
   return mockBills
-    .filter(bill => bill.consumerID === consumerID)
+    .filter(bill => bill.customer_id === customer_id)
     .reduce((total, bill) => total + bill.amount_due, 0)
 }
 
 // Get bills summary for a customer
-export function getBillsSummaryForConsumer(consumerID: string) {
-  const consumerBills = mockBills.filter(bill => bill.consumerID === consumerID)
+export function getBillsSummaryForConsumer(customer_id: string) {
+  const consumerBills = mockBills.filter(bill => bill.customer_id === customer_id)
   
   return {
     totalBills: consumerBills.length,

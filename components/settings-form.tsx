@@ -110,7 +110,7 @@ export function SettingsForm() {
   }
 
   const removeConsumerId = (id: string) => {
-    setConsumerIds(consumerIds.filter((consumerId) => consumerId !== id))
+    setConsumerIds(consumerIds.filter((customerId) => customerId !== id))
   }
 
   return (

@@ -8,24 +8,24 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Search } from "lucide-react"
-import { searchBillsByConsumerID, type Bill } from "@/lib/mock-data"
+import { type Bill } from "@/lib/mock-data"
 
 interface ConsumerSearchProps {
-  onSearchResults: (bills: Bill[], consumerID: string) => void
+  onSearchResults: (bills: Bill[], customerId: string) => void
 }
 
 export function ConsumerSearch({ onSearchResults }: ConsumerSearchProps) {
-  const [consumerID, setConsumerID] = useState("")
+  const [customerId, setCustomerId] = useState("")
   const [loading, setLoading] = useState(false)
 
   const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!consumerID.trim()) return
+    if (!customerId.trim()) return
 
     setLoading(true)
 
-    const bills = await fetchBills(consumerID.trim())
-    onSearchResults(bills, consumerID.trim())
+    const bills = await fetchBills(customerId.trim())
+    onSearchResults(bills, customerId.trim())
     setLoading(false)
   }
 
@@ -47,13 +47,13 @@ export function ConsumerSearch({ onSearchResults }: ConsumerSearchProps) {
       <CardContent>
         <form onSubmit={handleSearch} className="space-y-4">
           <div className="space-y-2">
-            <Label htmlFor="consumerID">Customer ID</Label>
+            <Label htmlFor="customerId">Customer ID</Label>
             <Input
-              id="consumerID"
+              id="customerId"
               type="text"
               placeholder="e.g., PV-019617, PV-019618, PV-019619"
-              value={consumerID}
-              onChange={(e) => setConsumerID(e.target.value)}
+              value={customerId}
+              onChange={(e) => setCustomerId(e.target.value)}
               required
             />
             <p className="text-xs text-muted-foreground">

@@ -8,11 +8,11 @@ import type { Bill } from "@/lib/mock-data"
 
 interface BillResultsProps {
   bills: Bill[]
-  consumerID: string
+  customerId: string
   onDownload: (bill: Bill) => void
 }
 
-export function BillResults({ bills, consumerID, onDownload }: BillResultsProps) {
+export function BillResults({ bills, customerId, onDownload }: BillResultsProps) {
   if (bills.length === 0) {
     return (
       <Card>
@@ -20,7 +20,7 @@ export function BillResults({ bills, consumerID, onDownload }: BillResultsProps)
           <FileText className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
           <h3 className="text-lg font-semibold mb-2">No Bills Found</h3>
           <p className="text-muted-foreground">
-            No bills were found for Customer ID: <strong>{consumerID}</strong>
+            No bills were found for Customer ID: <strong>{customerId}</strong>
           </p>
           <p className="text-sm text-muted-foreground mt-2">
             Please check your Customer ID or contact the society office for assistance.
@@ -46,7 +46,7 @@ export function BillResults({ bills, consumerID, onDownload }: BillResultsProps)
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h3 className="text-lg font-semibold">Bills for Customer ID: {consumerID}</h3>
+        <h3 className="text-lg font-semibold">Bills for Customer ID: {customerId}</h3>
         <Badge variant="secondary">
           {bills.length} bill{bills.length !== 1 ? "s" : ""} found
         </Badge>
