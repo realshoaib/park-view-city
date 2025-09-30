@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { LogOut, Settings } from "lucide-react"
 import { useAuth } from "@/app/contexts/auth-context"
 import { useRouter } from "next/navigation"
@@ -24,10 +24,11 @@ export function DashboardHeader() {
 
   return (
     <Card className="mb-6">
-      <CardContent className="p-6">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <Avatar className="h-12 w-12">
+      <CardContent className="p-4 md:p-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div className="flex items-center gap-3 md:gap-4">
+            <Avatar className="h-10 w-10 md:h-12 md:w-12">
+              <AvatarImage src="/placeholder-user.jpg" alt="User avatar" />
               <AvatarFallback className="bg-primary text-primary-foreground">
                 {user.full_name.toUpperCase()}
               </AvatarFallback>
